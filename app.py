@@ -395,28 +395,6 @@ def main():
 
     st.divider()
 
-    # ── High-risk cases ───────────────────────────────────────────────────────
-    high_fraud_df = df[df["final_probability"] > 0.7]
-
-    if not high_fraud_df.empty:
-        _section(f"High Risk Cases  ·  {len(high_fraud_df)} districts")
-
-        high_risk_df = (
-            high_fraud_df[["district_name", "final_probability", "fraud_score"]]
-            .copy()
-            .rename(columns={"district_name": "District", "final_probability": "Risk Score", "fraud_score": "Fraud Flags"})
-        )
-
-        st.dataframe(
-            high_risk_df.style
-                .format({"Risk Score": "{:.3f}", "Fraud Flags": "{:.0f}"})
-                .background_gradient(subset=["Risk Score"], cmap="Reds"),
-            use_container_width=True,
-            height=300,
-        )
-    else:
-        st.markdown('<div class="banner banner-info"><span class="banner-icon">ℹ</span><span>No high-risk districts detected (threshold&nbsp;&gt;&nbsp;0.7).</span></div>', unsafe_allow_html=True)
-
     # ── Export ────────────────────────────────────────────────────────────────
     _section("Export")
 
