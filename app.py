@@ -369,10 +369,10 @@ def main():
     st.divider()
 
     # ── Top 20 table ──────────────────────────────────────────────────────────
-    _section("Top 20 Districts by Risk Score")
+    _section(f"All Districts by Risk Score  ·  {len(df_sorted)} records")
 
     top20_df = (
-        df_sorted.head(20)[["district_name", "final_probability", "fraud_score"]]
+        df_sorted[["district_name", "final_probability", "fraud_score"]]
         .copy()
         .rename(columns={"district_name": "District", "final_probability": "Risk Score", "fraud_score": "Fraud Flags"})
     )
